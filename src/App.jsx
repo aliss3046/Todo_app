@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import TodoList from "./components/TodoList";
 import Filter from "./components/Filter";
+// Импортируем PNG как переменную
+"import myIcon from 'C:\Users\Alya\Desktop\todo-app\src\assets\icons\winxclub.png'"
 
 function App() {
   const [todos, setTodos] = useState([]);

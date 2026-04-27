@@ -11,9 +11,12 @@ function App() {
 
   // загрузка из localStorage
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("todos"));
-    if (saved) setTodos(saved);
-  }, []);
+  const saved = localStorage.getItem("todos");
+
+  if (saved) {
+    setTodos(JSON.parse(saved));
+  }
+}, []);
 
   // сохранение
   useEffect(() => {
@@ -29,25 +32,25 @@ function App() {
       completed: false,
     };
 
-    setTodos([newTodo, ...todos]);
+    setTodos((prev) => [newTodo, ...prev]);
     setText("");
   };
 
   const deleteTodo = (id) => {
-    setTodos(todos.filter((t) => t.id !== id));
+    setTodos((prev) => prev.filter((t) => t.id !== id));
   };
 
   const toggleTodo = (id) => {
-    setTodos(
-      todos.map((t) =>
+    setTodos((prev) =>
+      prev.map((t) => 
         t.id === id ? { ...t, completed: !t.completed } : t
       )
     );
   };
 
   const editTodo = (id, newText) => {
-    setTodos(
-      todos.map((t) =>
+    setTodos((prev) =>
+      prev.map((t) =>
         t.id === id ? { ...t, text: newText } : t
       )
     );
